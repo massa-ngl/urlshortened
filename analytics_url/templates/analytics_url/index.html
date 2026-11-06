@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+</head>
+
+<body>
+    <h1>URL Shortener Engine</h1>
+    <form action="#" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Shorten URL</button>
+    </form>
+
+    {% if shortened_obj %}
+    <div>
+        <p><strong>Shortened URL:</strong></p>
+        <a href="/{{ shortened_obj.short_code }}" target="" _blank">
+            {{ request.build_absolute_uri }}{{ shortened_obj.short_code }}
+        </a>
+        <p><a href="{% url 'stats_view' shortened_obj.short_code %}">View Analytics Dashboard</a></p>
+    </div>
+    {% endif %}
+</body>
+
+</html>
